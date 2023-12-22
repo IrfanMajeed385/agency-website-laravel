@@ -6,9 +6,9 @@
         if (Voyager::translatable($items)) {
             $items = $items->load('translations');
         }
-    
+ 
     @endphp
-    
+
     @foreach ($items as $item)
     
         @php

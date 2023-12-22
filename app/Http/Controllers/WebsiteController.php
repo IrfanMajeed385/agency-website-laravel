@@ -43,7 +43,7 @@ class WebsiteController extends Controller
         // Translate to Georgian
         $tr = new GoogleTranslate(); 
         $tr->setSource('en'); 
-        if(Session::has('lang')) {$lang = Session::get('lang'); $tr->setTarget($lang); }else{$lang ='en' ;$tr->setTarget($lang); }   
+        if(Session::has('lang')) {$lang = Session::get('lang'); $tr->setTarget($lang); } else{$lang ='en' ;$tr->setTarget($lang); }   
             
 
         if(request()->query('search')){
@@ -64,25 +64,25 @@ class WebsiteController extends Controller
         $allposts = Post::orderBy('created_at','DESC')->inRandomOrder()->limit(3)->get();
         $faqs = Faq::all()->random(2);
         $skills = Skill::all()->random(2);
-        $teams = Team::orderBy('created_at','ASC')->paginate(6);
+        // $teams = Team::orderBy('created_at','ASC')->paginate(6);
         $testimonials = Testimonial::orderBy('created_at','DESC')->get();
         
         $hero_section = Section::where('slug','hero-section')->first();
         $about = Section::where('slug','about')->first();
         $services_section = Section::where('slug','services')->first();
         $wcus_section = Section::where('slug','why-choose-us')->first();
-        $portfolio_section = Section::where('slug','portfolio')->first();
+        // $portfolio_section = Section::where('slug','portfolio')->first();
         $expertise_section = Section::where('slug','expertise')->first();
         $review_section = Section::where('slug','review')->first();
-        $team_section = Section::where('slug','team')->first();
+        // $team_section = Section::where('slug','team')->first();
         $ask_section = Section::where('slug','ask')->first();
         $blog_section = Section::where('slug','blog')->first();
        
         
            return view('website.home',compact(['tr','services','projects','testimonials',
-           'allposts','faqs','skills','teams','hero_section','about','services_section',
-           'wcus_section','portfolio_section','expertise_section','review_section',
-            'team_section','ask_section','blog_section'])); 
+           'allposts','faqs','skills','hero_section','about','services_section',
+           'wcus_section','expertise_section','review_section',
+            'ask_section','blog_section'])); 
         }  
     }
     public function blog(){

@@ -43,7 +43,7 @@
                          </div>
 
                          <div class="option-item">
-                             <div class="dropdown language-option">
+                             {{-- <div class="dropdown language-option">
                                  <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                      aria-haspopup="true" aria-expanded="false">
                                      <i class="ri-earth-line"></i>
@@ -72,7 +72,7 @@
                                      @endif
 
                                  </div>
-                             </div>
+                             </div> --}}
                          </div>
 
                          <div class="option-item">
@@ -106,7 +106,7 @@
                          </div>
 
                          <div class="option-item">
-                             <div class="dropdown language-option">
+                             {{-- <div class="dropdown language-option">
                                  <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                      aria-haspopup="true" aria-expanded="false">
                                      <i class="ri-earth-line"></i>
@@ -134,7 +134,7 @@
                                          </a>
                                      @endif
                                  </div>
-                             </div>
+                             </div> --}}
                          </div>
 
                          <div class="option-item">

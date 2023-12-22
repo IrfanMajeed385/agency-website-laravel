@@ -88,7 +88,7 @@
             <div class="section-title">
                 <span>{{ $tr->translate($services_section->title) }}</span>
                 <h2>{{ $tr->translate($services_section->heading) }}</h2>
-                <p>{{ $tr->translate($services_section->description) }}</p>
+                <p>{{ $tr->translate(($services_section->description) ? $services_section->description : '') }}</p>
             </div>
 
             <div class="row justify-content-center">
@@ -243,53 +243,53 @@
 
 
     <!-- Start Case Study Area -->
-    <div class="case-study-area pt-100 pb-75">
+    <!--<div class="case-study-area pt-100 pb-75" style="display: none;">
         <div class="container">
             <div class="section-title-wrap">
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-12">
-                        <span>{{ $tr->translate($portfolio_section->title) }}</span>
-                        <h2>{{ $tr->translate($portfolio_section->heading) }}</h2>
-                        <p>{{ $tr->translate($portfolio_section->description) }}</p>
+                        {{-- <span>{{ $tr->translate($portfolio_section->title) }}</span> --}}
+                        {{-- <h2>{{ $tr->translate($portfolio_section->heading) }}</h2> --}}
+                        {{-- <p>{{ $tr->translate($portfolio_section->description) }}</p> --}}
                     </div>
 
                     <div class="col-lg-5 col-md-12 text-end">
-                        @if ($portfolio_section->btn_url)
-                            <a href="{{ $portfolio_section->btn_url }}" class="default-btn">
-                                @if ($portfolio_section->btn_name)
-                                    {{ $tr->translate($portfolio_section->btn_name) }}
-                                @else
-                                    {{ $tr->translate('More') }}
-                                @endif
+                        {{-- @if ($portfolio_section->btn_url) --}}
+                            {{-- <a href="{{ $portfolio_section->btn_url }}" class="default-btn"> --}}
+                                {{-- @if ($portfolio_section->btn_name) --}}
+                                    {{-- {{ $tr->translate($portfolio_section->btn_name) }} --}}
+                                {{-- @else --}}
+                                    {{-- {{ $tr->translate('More') }} --}}
+                                {{-- @endif --}}
 
                             </a>
-                        @endif
+                        {{-- @endif --}}
 
                     </div>
                 </div>
             </div>
 
             <div class="row justify-content-center">
-                @foreach ($projects as $project)
+                {{-- @foreach ($projects as $project) --}}
                     <div class="col-lg-4 col-md-4">
                         <div class="single-case-study-card">
-                            <a href="{{ Route('website.project', ['slug' => $project->slug]) }}">
-                                <img src="{{ Voyager::image($project->thumbnail) }}" alt="{{ $project->title }}"></a>
+                            {{-- <a href="{{ Route('website.project', ['slug' => $project->slug]) }}"> --}}
+                                {{-- <img src="{{ Voyager::image($project->thumbnail) }}" alt="{{ $project->title }}"></a> --}}
 
                             <div class="case-study-content">
                                 <h3>
                                     <a
-                                        href="{{ Route('website.project', ['slug' => $project->slug]) }}">{{ $tr->translate($project->title) }}</a>
+                                        {{-- href="{{ Route('website.project', ['slug' => $project->slug]) }}">{{ $tr->translate($project->title) }}</a> --}}
                                 </h3>
-                                <a href="{{ Route('website.project', ['slug' => $project->slug]) }}"
+                                {{-- <a href="{{ Route('website.project', ['slug' => $project->slug]) }}" --}}
                                     class="case-btn"><i class="ri-arrow-right-line"></i></a>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                {{-- @endforeach --}}
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- End Case Study Area -->
     <!-- Start Expertise Area -->
     <div class="expertise-area-with-white-color pb-100">
@@ -423,89 +423,89 @@
     <!-- End Testimonials Area -->
 
     <!-- Start Team Area -->
-    <div class="team-area pt-100 pb-75">
+    <!--<div class="team-area pt-100 pb-75" style="display: none;">
         <div class="container">
             <div class="section-title">
-                <span class="text-light">{{ $tr->translate($team_section->title) }}</span>
-                <h2>{{ $tr->translate($team_section->heading) }}</h2>
-                <p class="text-light">{{ $tr->translate($team_section->description) }}</p>
+                {{-- <span class="text-light">{{ $tr->translate($team_section->title) }}</span> --}}
+                {{-- <h2>{{ $tr->translate($team_section->heading) }}</h2> --}}
+                {{-- <p class="text-light">{{ $tr->translate($team_section->description) }}</p> --}}
             </div>
 
             <div class="team-slides-two owl-carousel owl-theme">
-                @foreach ($teams as $team)
+                {{-- @foreach ($teams as $team) --}}
                     <div class="single-team-item">
                         <div class="team-image">
-                            <img src="{{ Voyager::image($team->image) }}" alt="{{ $team->name }}">
+                            {{-- <img src="{{ Voyager::image($team->image) }}" alt="{{ $team->name }}"> --}}
 
                             <ul class="social">
-                                @if ($team->facebook)
+                                {{-- @if ($team->facebook) --}}
                                     <li>
-                                        <a href="{{ $team->facebook }}" target="_blank">
+                                        {{-- <a href="{{ $team->facebook }}" target="_blank"> --}}
                                             <i class="ri-facebook-fill"></i>
                                         </a>
                                     </li>
-                                @endif
-                                @if ($team->twitter)
+                                {{-- @endif --}}
+                                {{-- @if ($team->twitter) --}}
                                     <li>
-                                        <a href="{{ $team->twitter }}" target="_blank">
+                                        {{-- <a href="{{ $team->twitter }}" target="_blank"> --}}
                                             <i class="ri-twitter-fill"></i>
                                         </a>
                                     </li>
-                                @endif
-                                @if ($team->instagram)
+                                {{-- @endif --}}
+                                {{-- @if ($team->instagram) --}}
                                     <li>
-                                        <a href="{{ $team->instagram }}" target="_blank">
+                                        {{-- <a href="{{ $team->instagram }}" target="_blank"> --}}
                                             <i class="ri-instagram-line"></i>
                                         </a>
                                     </li>
-                                @endif
-                                @if ($team->linkedin)
+                                {{-- @endif --}}
+                                {{-- @if ($team->linkedin) --}}
                                     <li>
-                                        <a href="{{ $team->linkedin }}" target="_blank">
+                                        {{-- <a href="{{ $team->linkedin }}" target="_blank"> --}}
                                             <i class="ri-linkedin-line"></i>
                                         </a>
                                     </li>
-                                @endif
-                                @if ($team->website)
+                                {{-- @endif --}}
+                                {{-- @if ($team->website) --}}
                                     <li>
-                                        <a href="{{ $team->website }}" target="_blank">
+                                        {{-- <a href="{{ $team->website }}" target="_blank"> --}}
                                             <i class="ri-global-fill"></i>
                                         </a>
                                     </li>
-                                @endif
-                                @if ($team->github)
+                                {{-- @endif --}}
+                                {{-- @if ($team->github) --}}
                                     <li>
-                                        <a href="{{ $team->github }}" target="_blank">
+                                        {{-- <a href="{{ $team->github }}" target="_blank"> --}}
                                             <i class="ri-github-fill"></i>
                                         </a>
                                     </li>
-                                @endif
-                                @if ($team->youtube)
+                                {{-- @endif --}}
+                                {{-- @if ($team->youtube) --}}
                                     <li>
-                                        <a href="{{ $team->youtube }}" target="_blank">
+                                        {{-- <a href="{{ $team->youtube }}" target="_blank"> --}}
                                             <i class="ri-youtube-fill"></i>
                                         </a>
                                     </li>
-                                @endif
+                                {{-- @endif --}}
                             </ul>
                         </div>
                         <div class="team-content">
                             <h3>
                                 {{-- <a href="{{ Route('website.team', ['slug' => $team->slug]) }}">{{ $team->name }}</a> --}}
-                                {{ $team->name }}
+                                {{-- {{ $team->name }} --}}
                             </h3>
-                            <span>{{ $team->tagline }}</span>
+                            {{-- <span>{{ $team->tagline }}</span> --}}
                         </div>
                     </div>
-                @endforeach
+                {{-- @endforeach --}}
 
             </div>
         </div>
 
         <div class="team-shape-1" data-speed="0.08" data-revert="true">
-            <img src="{{ asset('website') }}/assets/images/team/shape-1.png" alt="Oleev">
+            {{-- <img src="{{ asset('website') }}/assets/images/team/shape-1.png" alt="Oleev"> --}}
         </div>
-    </div>
+    </div>-->
     <!-- End Team Area -->
 
 

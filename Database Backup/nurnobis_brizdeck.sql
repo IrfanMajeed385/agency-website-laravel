@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 15, 2023 at 11:52 AM
--- Server version: 10.5.18-MariaDB-cll-lve
--- PHP Version: 7.4.33
+-- Generation Time: Sep 24, 2023 at 09:32 PM
+-- Server version: 5.7.33
+-- PHP Version: 8.0.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,26 +29,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `apps` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `icon` varchar(255) NOT NULL,
-  `short_bio` varchar(255) DEFAULT NULL,
-  `body` text NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `short_bio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `version` float NOT NULL,
-  `download_url` varchar(255) DEFAULT NULL,
-  `video` varchar(255) DEFAULT NULL,
-  `gallery` text DEFAULT NULL,
+  `download_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gallery` text COLLATE utf8mb4_unicode_ci,
   `vote_count` int(11) DEFAULT NULL,
   `view_count` int(11) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `size` float DEFAULT NULL,
-  `developer` varchar(255) DEFAULT NULL,
-  `requirement` text DEFAULT NULL,
+  `developer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `requirement` text COLLATE utf8mb4_unicode_ci,
   `download_count` int(11) DEFAULT NULL,
-  `play_store` varchar(255) DEFAULT NULL,
-  `apps_store` varchar(255) DEFAULT NULL,
-  `website` varchar(255) DEFAULT NULL,
-  `privacy` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
+  `play_store` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apps_store` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `privacy` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -62,9 +61,9 @@ CREATE TABLE `apps` (
 
 CREATE TABLE `brands` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `url` varchar(255) NOT NULL DEFAULT '#',
-  `image` varchar(255) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#',
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -87,9 +86,9 @@ INSERT INTO `brands` (`id`, `name`, `url`, `image`, `created_at`, `updated_at`) 
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
-  `order` int(11) NOT NULL DEFAULT 1,
-  `name` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
+  `order` int(11) NOT NULL DEFAULT '1',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -113,10 +112,10 @@ CREATE TABLE `comments` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `post_id` int(10) UNSIGNED NOT NULL,
-  `comment` text DEFAULT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(20) NOT NULL DEFAULT '"PENDING"'
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '"PENDING"'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -140,12 +139,12 @@ INSERT INTO `comments` (`id`, `user_id`, `post_id`, `comment`, `created_at`, `up
 
 CREATE TABLE `contacts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `message` text DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -168,17 +167,17 @@ INSERT INTO `contacts` (`id`, `type`, `name`, `email`, `phone`, `subject`, `mess
 CREATE TABLE `data_rows` (
   `id` int(10) UNSIGNED NOT NULL,
   `data_type_id` int(10) UNSIGNED NOT NULL,
-  `field` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `display_name` varchar(255) NOT NULL,
-  `required` tinyint(1) NOT NULL DEFAULT 0,
-  `browse` tinyint(1) NOT NULL DEFAULT 1,
-  `read` tinyint(1) NOT NULL DEFAULT 1,
-  `edit` tinyint(1) NOT NULL DEFAULT 1,
-  `add` tinyint(1) NOT NULL DEFAULT 1,
-  `delete` tinyint(1) NOT NULL DEFAULT 1,
-  `details` text DEFAULT NULL,
-  `order` int(11) NOT NULL DEFAULT 1
+  `field` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `required` tinyint(1) NOT NULL DEFAULT '0',
+  `browse` tinyint(1) NOT NULL DEFAULT '1',
+  `read` tinyint(1) NOT NULL DEFAULT '1',
+  `edit` tinyint(1) NOT NULL DEFAULT '1',
+  `add` tinyint(1) NOT NULL DEFAULT '1',
+  `delete` tinyint(1) NOT NULL DEFAULT '1',
+  `details` text COLLATE utf8mb4_unicode_ci,
+  `order` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -382,18 +381,18 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 
 CREATE TABLE `data_types` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `display_name_singular` varchar(255) NOT NULL,
-  `display_name_plural` varchar(255) NOT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  `model_name` varchar(255) DEFAULT NULL,
-  `policy_name` varchar(255) DEFAULT NULL,
-  `controller` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `generate_permissions` tinyint(1) NOT NULL DEFAULT 0,
-  `server_side` tinyint(4) NOT NULL DEFAULT 0,
-  `details` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name_singular` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name_plural` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `model_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `policy_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `controller` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `generate_permissions` tinyint(1) NOT NULL DEFAULT '0',
+  `server_side` tinyint(4) NOT NULL DEFAULT '0',
+  `details` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -430,12 +429,12 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -446,8 +445,8 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `faqs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `question` varchar(255) NOT NULL,
-  `answer` text NOT NULL,
+  `question` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -468,10 +467,10 @@ INSERT INTO `faqs` (`id`, `question`, `answer`, `created_at`, `updated_at`) VALU
 
 CREATE TABLE `galleries` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `location` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `gallery` text NOT NULL,
+  `gallery` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -491,7 +490,7 @@ INSERT INTO `galleries` (`id`, `name`, `location`, `date`, `gallery`, `created_a
 
 CREATE TABLE `menus` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -516,17 +515,17 @@ INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `menu_items` (
   `id` int(10) UNSIGNED NOT NULL,
   `menu_id` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(255) NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `target` varchar(255) NOT NULL DEFAULT '_self',
-  `icon_class` varchar(255) DEFAULT NULL,
-  `color` varchar(255) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `target` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
+  `icon_class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `order` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `route` varchar(255) DEFAULT NULL,
-  `parameters` text DEFAULT NULL
+  `route` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parameters` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -586,7 +585,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -633,14 +632,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `pages` (
   `id` int(10) UNSIGNED NOT NULL,
   `author_id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `excerpt` text DEFAULT NULL,
-  `body` text DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) NOT NULL,
-  `meta_description` text DEFAULT NULL,
-  `meta_keywords` text DEFAULT NULL,
-  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `excerpt` text COLLATE utf8mb4_unicode_ci,
+  `body` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -660,8 +659,8 @@ INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `sl
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -680,8 +679,8 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `key` varchar(255) NOT NULL,
-  `table_name` varchar(255) DEFAULT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -938,11 +937,11 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -958,19 +957,19 @@ CREATE TABLE `posts` (
   `id` int(10) UNSIGNED NOT NULL,
   `author_id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `title` varchar(255) NOT NULL,
-  `seo_title` varchar(255) DEFAULT NULL,
-  `excerpt` text DEFAULT NULL,
-  `body` text NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) NOT NULL,
-  `meta_description` text DEFAULT NULL,
-  `meta_keywords` text DEFAULT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'DRAFT',
-  `featured` tinyint(1) NOT NULL DEFAULT 0,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `excerpt` text COLLATE utf8mb4_unicode_ci,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `featured` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `view_count` bigint(20) NOT NULL DEFAULT 0
+  `view_count` bigint(20) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -978,9 +977,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `seo_title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`, `view_count`) VALUES
-(6, 1, 3, 'আপনার প্রতিষ্ঠান টি আরো উন্নত ও আকর্ষণীয় করে তুলতে থাকুন Brizdeck সাথে।', NULL, 'কথায় আছে প্রথমে দর্শনধারী তারপর গুণবিচারী। একটি প্রতিষ্ঠানের সৌন্দর্য্য প্রকাশ পায় তার শিল্পকার্য এর মাধ্যমে। আর সে জন্য প্রয়োজন আকর্ষণীয় চোখ ধাঁধানো ইউনিক সব ডিজাইন। তাই আপনার প্রতিষ্ঠান টি আরো উন্নত ও আকর্ষণীয় করে তুলতে থাকুন Brizdeck সাথে।', '<p>🎉এই রমজান হয়ে উঠুক আরো বরকতময় সাশ্রয়ী মূল্যে ডিজাইন করুন ব্রিজডেক এর সাথে। কথায় আছে প্রথমে দর্শনধারী তারপর গুণবিচারী। একটি প্রতিষ্ঠানের সৌন্দর্য্য প্রকাশ পায় তার শিল্পকার্য এর মাধ্যমে। আর সে জন্য প্রয়োজন আকর্ষণীয় চোখ ধাঁধানো ইউনিক সব ডিজাইন। তাই আপনার প্রতিষ্ঠান টি আরো উন্নত ও আকর্ষণীয় করে তুলতে থাকুন Brizdeck সাথে।</p>\r\n<p>আমাদের সেবা সমূহ হলোঃ-</p>\r\n<ul>\r\n<li>🎯কোম্পানির লোগো ডিজাইন</li>\r\n<li>🎯কভার ডিজাইন</li>\r\n<li>🎯সোশ্যাল মিডিয়া ব্যানার ডিজাইন</li>\r\n<li>🎯বিজনেস কার্ড ডিজাইন</li>\r\n</ul>\r\n<p>আমাদের সার্ভিস সমূহ সম্পর্কে বিস্তারিত জানতে যোগাযোগ করুন ⬇️</p>\r\n<ul>\r\n<li>&copy;️ Brizdeck Corporation</li>\r\n<li>🏢 Dhanmondi 32, Dhaka 1209</li>\r\n<li>📱 Messenger : <a href=\"https://m.me/brizdeck.official\" target=\"_blank\" rel=\"noopener\">m.me/brizdeck.official </a></li>\r\n<li>📧 Mail :brizdeck@gmail.com</li>\r\n<li>📞 Contact : +889696124648, 01796004569</li>\r\n</ul>', 'posts\\April2022\\0k2v3astKMNPkaGHldJx.jpg', 'brizdeck', NULL, NULL, 'PUBLISHED', 0, '2022-04-16 01:17:35', '2023-01-10 08:02:36', 132),
+(6, 1, 3, 'আপনার প্রতিষ্ঠান টি আরো উন্নত ও আকর্ষণীয় করে তুলতে থাকুন Brizdeck সাথে।', NULL, 'কথায় আছে প্রথমে দর্শনধারী তারপর গুণবিচারী। একটি প্রতিষ্ঠানের সৌন্দর্য্য প্রকাশ পায় তার শিল্পকার্য এর মাধ্যমে। আর সে জন্য প্রয়োজন আকর্ষণীয় চোখ ধাঁধানো ইউনিক সব ডিজাইন। তাই আপনার প্রতিষ্ঠান টি আরো উন্নত ও আকর্ষণীয় করে তুলতে থাকুন Brizdeck সাথে।', '<p>🎉এই রমজান হয়ে উঠুক আরো বরকতময় সাশ্রয়ী মূল্যে ডিজাইন করুন ব্রিজডেক এর সাথে। কথায় আছে প্রথমে দর্শনধারী তারপর গুণবিচারী। একটি প্রতিষ্ঠানের সৌন্দর্য্য প্রকাশ পায় তার শিল্পকার্য এর মাধ্যমে। আর সে জন্য প্রয়োজন আকর্ষণীয় চোখ ধাঁধানো ইউনিক সব ডিজাইন। তাই আপনার প্রতিষ্ঠান টি আরো উন্নত ও আকর্ষণীয় করে তুলতে থাকুন Brizdeck সাথে।</p>\r\n<p>আমাদের সেবা সমূহ হলোঃ-</p>\r\n<ul>\r\n<li>🎯কোম্পানির লোগো ডিজাইন</li>\r\n<li>🎯কভার ডিজাইন</li>\r\n<li>🎯সোশ্যাল মিডিয়া ব্যানার ডিজাইন</li>\r\n<li>🎯বিজনেস কার্ড ডিজাইন</li>\r\n</ul>\r\n<p>আমাদের সার্ভিস সমূহ সম্পর্কে বিস্তারিত জানতে যোগাযোগ করুন ⬇️</p>\r\n<ul>\r\n<li>&copy;️ Brizdeck Corporation</li>\r\n<li>🏢 Dhanmondi 32, Dhaka 1209</li>\r\n<li>📱 Messenger : <a href=\"https://m.me/brizdeck.official\" target=\"_blank\" rel=\"noopener\">m.me/brizdeck.official </a></li>\r\n<li>📧 Mail :brizdeck@gmail.com</li>\r\n<li>📞 Contact : +889696124648, 01796004569</li>\r\n</ul>', 'posts\\April2022\\0k2v3astKMNPkaGHldJx.jpg', 'brizdeck', NULL, NULL, 'PUBLISHED', 0, '2022-04-16 01:17:35', '2023-09-18 11:37:08', 133),
 (7, 1, 1, 'What Is SEO / Search Engine Optimization?', NULL, 'SEO stands for “search engine optimization.” In simple terms, it means the process of improving your site to increase its visibility when people search for products or services related to your business in Google, Bing, and other search engines. The better visibility your pages have in search results, the more likely you are to garner attention and attract prospective and existing customers to your business.', '<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">SEO stands for &ldquo;search engine optimization.&rdquo; In simple terms, it means the process of improving your site to increase its visibility when people search for products or services related to your business in Google, Bing, and other search engines. The better visibility your pages have in search results, the more likely you are to garner attention and attract prospective and existing customers to your business.</p>\r\n<h2 style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 400; line-height: 1.3em; font-size: 2.625rem; font-family: Oswald; letter-spacing: -0.01em; background-color: #ffffff;\">How does SEO work?</h2>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">Search engines such as&nbsp;<a style=\"box-sizing: border-box; color: #0093ff;\" href=\"https://searchengineland.com/library/google\">Google</a>&nbsp;and&nbsp;<a style=\"box-sizing: border-box; color: #0093ff;\" href=\"https://searchengineland.com/library/bing\">Bing</a>&nbsp;use bots to crawl pages on the web, going from site to site, collecting information about those pages and putting them in an index. Think of the index like a giant library where a librarian can pull up a book (or a web page) to help you find exactly what you&rsquo;re looking for at the time.</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">Next, algorithms analyze pages in the index, taking into account hundreds of ranking factors or signals, to determine the order pages should appear in the search results for a given query. In our library analogy, the librarian has read&nbsp;<em style=\"box-sizing: border-box;\">every single book</em>&nbsp;in the library and can tell you exactly which one will have the answers to your questions.</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">Our SEO success factors can be considered proxies for aspects of the&nbsp;<a style=\"box-sizing: border-box; color: #0093ff;\" href=\"https://searchengineland.com/the-google-page-experience-update-user-experience-to-become-a-google-ranking-factor-335252\">user experience</a>. It&rsquo;s how search bots estimate exactly how well a&nbsp; website or web page can give the searcher what they&rsquo;re searching for.&nbsp;</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">Unlike&nbsp;<a style=\"box-sizing: border-box; color: #0093ff;\" href=\"https://searchengineland.com/guide/what-is-paid-search\">paid search ads</a>, you can&rsquo;t pay search engines to get higher organic search rankings, which means SEO experts have to put in the work. That&rsquo;s where we come in.</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">Our Periodic Table of SEO Factors organizes the factors into six main categories and weights each based on its overall importance to SEO. For example, content quality and keyword research are key factors of content optimization, and crawlability and speed are important site architecture factors.</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">The newly updated SEO Periodic Table also includes a list of Toxins that detract from SEO best practices. These are shortcuts or tricks that may have been sufficient to guarantee a high ranking back in the day when the engines&rsquo; methods were much less sophisticated. And, they might even work for a short time now &mdash; at least until you&rsquo;re caught.</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">We&rsquo;ve also got a brand new Niches section that deep-dives into the SEO success factors behind three key niches: Local SEO, News/Publishing, and Ecommerce SEO. While our overall SEO Periodic Table will help you with the best practices, knowing the nuances of SEO for each of these Niches can help you succeed in search results for your small business, recipe blog, and/or online store.</p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-top: 0px; margin-bottom: 1.25rem; font-family: Roboto; font-size: 1.125rem; line-height: 1.4em; background-color: #ffffff;\">The search algorithms are designed to surface relevant, authoritative pages and provide users with an efficient search experience. Optimizing your site and content with these factors in mind can help your pages rank higher in the search results.</p>', NULL, 'what-is-seo-search-engine-optimization', NULL, NULL, 'PUBLISHED', 0, '2022-04-18 04:27:04', '2023-01-14 18:07:41', 156),
-(8, 1, 1, 'What is Web Development?', NULL, NULL, '<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">Web development&nbsp;is the building and maintenance of websites; it&rsquo;s the work that happens behind the scenes to make a website look great, work fast and perform well with a seamless user experience.</span></p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">Web developers, or &lsquo;devs&rsquo;, do this by using a variety of coding languages. The languages they use depends on the types of tasks they are preforming and the platforms on which they are working.</span></p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">Web development skills are in high demand worldwide and well paid too &ndash; making development a great career option. It is one of the easiest accessible higher paid fields as you do not need a traditional university degree to become qualified.</span></p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">The field of web development is</span><span style=\"box-sizing: border-box;\">&nbsp;generally broken down into front-end (the user-facing side) and back-end (the server side). Let&rsquo;s delve into the details.</span></p>', NULL, 'what-is-web-development', NULL, NULL, 'PUBLISHED', 0, '2022-04-18 04:28:10', '2023-01-14 18:01:49', 181);
+(8, 1, 1, 'What is Web Development?', NULL, NULL, '<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">Web development&nbsp;is the building and maintenance of websites; it&rsquo;s the work that happens behind the scenes to make a website look great, work fast and perform well with a seamless user experience.</span></p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">Web developers, or &lsquo;devs&rsquo;, do this by using a variety of coding languages. The languages they use depends on the types of tasks they are preforming and the platforms on which they are working.</span></p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">Web development skills are in high demand worldwide and well paid too &ndash; making development a great career option. It is one of the easiest accessible higher paid fields as you do not need a traditional university degree to become qualified.</span></p>\r\n<p style=\"box-sizing: border-box; overflow-wrap: break-word; margin-bottom: 15px; margin-top: 0px; color: #003668; font-family: Montserrat, sans-serif; font-size: 16px; background-color: #ffffff;\"><span style=\"box-sizing: border-box;\">The field of web development is</span><span style=\"box-sizing: border-box;\">&nbsp;generally broken down into front-end (the user-facing side) and back-end (the server side). Let&rsquo;s delve into the details.</span></p>', NULL, 'what-is-web-development', NULL, NULL, 'PUBLISHED', 0, '2022-04-18 04:28:10', '2023-09-18 11:37:03', 182);
 
 -- --------------------------------------------------------
 
@@ -1014,22 +1013,22 @@ INSERT INTO `post_tag` (`post_id`, `tag_id`) VALUES
 
 CREATE TABLE `projects` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `thumbnail` varchar(255) NOT NULL,
-  `body` text NOT NULL,
-  `images` text DEFAULT NULL,
-  `client` varchar(255) NOT NULL,
-  `src_name` varchar(255) DEFAULT NULL,
-  `src_url` varchar(255) DEFAULT '#',
-  `category` varchar(255) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `images` text COLLATE utf8mb4_unicode_ci,
+  `client` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `src_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `src_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '#',
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `excerpt` text DEFAULT NULL,
+  `excerpt` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `quote` text DEFAULT NULL,
-  `quote_by` varchar(255) DEFAULT NULL,
-  `quote_url` varchar(255) DEFAULT '#'
+  `quote` text COLLATE utf8mb4_unicode_ci,
+  `quote_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quote_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '#'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1066,8 +1065,8 @@ INSERT INTO `project_skill` (`id`, `project_id`, `skill_id`) VALUES
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `display_name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1089,25 +1088,25 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) V
 
 CREATE TABLE `sections` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `heading` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `background` text DEFAULT NULL,
-  `btn_url` varchar(255) DEFAULT NULL,
-  `image1` text DEFAULT NULL,
-  `image2` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `heading` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `background` text COLLATE utf8mb4_unicode_ci,
+  `btn_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image1` text COLLATE utf8mb4_unicode_ci,
+  `image2` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `slug` varchar(255) NOT NULL,
-  `btn_name` varchar(255) DEFAULT NULL,
-  `video_url` varchar(255) DEFAULT NULL,
-  `option1_tiltle` varchar(255) DEFAULT NULL,
-  `option1_icon` varchar(255) DEFAULT NULL,
-  `option1_description` text DEFAULT NULL,
-  `option2_tiltle` varchar(255) DEFAULT NULL,
-  `option2_icon` varchar(255) DEFAULT NULL,
-  `option2_description` varchar(255) DEFAULT NULL
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `btn_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option1_tiltle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option1_icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option1_description` text COLLATE utf8mb4_unicode_ci,
+  `option2_tiltle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option2_icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option2_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1115,13 +1114,13 @@ CREATE TABLE `sections` (
 --
 
 INSERT INTO `sections` (`id`, `name`, `title`, `heading`, `description`, `background`, `btn_url`, `image1`, `image2`, `created_at`, `updated_at`, `slug`, `btn_name`, `video_url`, `option1_tiltle`, `option1_icon`, `option1_description`, `option2_tiltle`, `option2_icon`, `option2_description`) VALUES
-(1, 'Hero Section', 'Brizdeck', 'Powerful Websites Development and Digital Marketing Agency', 'Brizdeck is a marketing agency that offers Digital Marketing Services to clients. If you\'re having trouble growing your business Brizdeck can be your right partner to get the best marketing services for expanding your online business. Contact with us', 'sections\\April2022\\p3eDVIOYVsGq5DlIV6Hc.jpg', 'https://brizdeck.com/contact', NULL, NULL, '2022-04-12 02:54:35', '2022-04-16 21:35:05', 'hero-section', 'Contact Us', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'About', 'About Brizdeck', 'Best Award Winning Creative Agency Shape Of Perfect Solution 1', 'Hi, We’re BRIZDECK! A Creative Digital Marketing and Web Development agency based Globally. \r\nFrom strategy to implementation and ongoing technical and marketing support, leveraging our 2 years of proven experience in delivering beautiful results. \r\nWe Provide Digital and Web Development Service Marketing services. Our team is ready to handle any business challenge, powered by innovation and creativity, and backed by cutting-edge technology.', NULL, 'http://127.0.0.1:8000/about', 'sections\\April2022\\C87T8G9a84LT7s0CbmHU.jpg', 'sections\\April2022\\7lfK2IkeoUgvmIec9zX7.jpg', '2022-04-12 03:17:15', '2022-04-16 01:45:42', 'about', 'Learn More', NULL, 'Mission', 'ri-bubble-chart-fill', 'Experience is such a thing that you can’t make with money. Our 2+ years of experience of excellent data-driven results make us different from all other SEO companies.', 'Vision', 'ri-medal-2-fill', 'Every SEO company says that they can deliver you results, but we don’t just say but also show you the proof from our real projects.'),
-(3, 'Services', 'Our Services', 'Get Benefit And More With Our Excelent Services', '~', NULL, 'https://brizdeck.com/services', NULL, NULL, '2022-04-12 03:29:28', '2022-04-16 21:35:37', 'services', 'More Services', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'Why Choose Us', 'Why Choose Us', 'Our Working Process To Help Your Boost Your Business', 'The answer is simple – Brizdeck helps you achieve more sales and revenue from our Digital Marketing and Web Development services. As we are in the industry for more than 2 years now (from 2020) we have grown high-level expertise in this industry.', 'sections\\April2022\\2gbLBZbWVW8CHJWveMmJ.jpg', NULL, NULL, NULL, '2022-04-12 03:43:24', '2022-04-16 01:35:29', 'why-choose-us', NULL, NULL, 'Experience', 'ri-microscope-line', 'Experience is such a thing that you can’t make with money. Our 2+ years of experience of excellent data-driven results make us different from all other SEO companies.', 'Proof of Results', 'ri-shield-check-line', 'Every SEO company says that they can deliver you results, but we don’t just say but also show you the proof from our real projects.'),
+(1, 'Hero Section', 'Brizdeck', 'Powerful Websites Development and Digital Marketing Agency', 'Brizdeck is a marketing agency that offers Digital Marketing Services to clients. If you\'re having trouble growing your business Brizdeck can be your right partner to get the best marketing services for expanding your online business. Contact with us', 'sections\\September2023\\bskByzLfCLAU6jkm0j5X.jpg', 'https://brizdeck.com/contact', 'sections\\September2023\\GlzoKwRmrTvNwpImjwAo.jpg', 'sections\\September2023\\CMl9SFxR7xENnuZ4QwAF.jpg', '2022-04-12 02:54:35', '2023-09-07 16:52:14', 'hero-section', 'Contact Us', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'About', 'About Brizdeck', 'Best Award Winning Creative Agency Shape Of Perfect Solution 1', 'Hi, We’re BRIZDECK! A Creative Digital Marketing and Web Development agency based Globally. \r\nFrom strategy to implementation and ongoing technical and marketing support, leveraging our 2 years of proven experience in delivering beautiful results. \r\nWe Provide Digital and Web Development Service Marketing services. Our team is ready to handle any business challenge, powered by innovation and creativity, and backed by cutting-edge technology.', NULL, 'http://127.0.0.1:8000/about', 'sections\\September2023\\HxJqjfSAjO8qYdDxD2PX.png', 'sections\\September2023\\4eeyugx12AL1MKcLV1F6.jpg', '2022-04-12 03:17:15', '2023-09-07 16:56:34', 'about', 'Learn More', NULL, 'Mission', 'ri-bubble-chart-fill', 'Experience is such a thing that you can’t make with money. Our 2+ years of experience of excellent data-driven results make us different from all other SEO companies.', 'Vision', 'ri-medal-2-fill', 'Every SEO company says that they can deliver you results, but we don’t just say but also show you the proof from our real projects.'),
+(3, 'Services', 'Our Services', 'Get Benefit And More With Our Excelent Services', '~', NULL, 'https://brizdeck.com/services', NULL, NULL, '2022-04-12 03:29:28', '2023-09-07 17:00:32', 'services', 'More Services', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Why Choose Us', 'Why Choose Us', 'Our Working Process To Help Your Boost Your Business', 'The answer is simple – Brizdeck helps you achieve more sales and revenue from our Digital Marketing and Web Development services. As we are in the industry for more than 2 years now (from 2020) we have grown high-level expertise in this industry.', 'sections\\September2023\\3iqEMmgcTsqeFkgi8sJk.jpg', NULL, 'sections\\September2023\\CI2ulQBkTWi645xjxjbZ.jpg', 'sections\\September2023\\tmnNtbfYTMb5BGL4UKl1.jpg', '2022-04-12 03:43:24', '2023-09-07 17:04:56', 'why-choose-us', NULL, NULL, 'Experience', 'ri-microscope-line', 'Experience is such a thing that you can’t make with money. Our 2+ years of experience of excellent data-driven results make us different from all other SEO companies.', 'Proof of Results', 'ri-shield-check-line', 'Every SEO company says that they can deliver you results, but we don’t just say but also show you the proof from our real projects.'),
 (5, 'Funfact', 'Funfact', NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-12 03:50:43', '2022-04-12 03:50:43', 'funfact', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 'Portfolio', 'Our Portfolio', 'Grow And Experience Endless Possibilites To Your Business', '~', 'sections\\April2022\\nxcqGRtAZhlMhwgEdXG2.jpg', 'http://127.0.0.1:8000/project', NULL, NULL, '2022-04-12 03:53:01', '2022-04-16 01:50:20', 'portfolio', 'More Portfolio', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'Expertise', 'Our Expertise', 'Boost your business with our Creative Ideas and Brand Solutions', 'Lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas amet est scelerisque lectus tortor sit lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas amet est scelerisque lectus tortor sit.', NULL, 'http://127.0.0.1:8000/contact', 'sections\\April2022\\Tsh7oiz6UJSSr7UVtJML.png', NULL, '2022-04-12 04:03:17', '2022-04-16 02:04:57', 'expertise', 'Contact Us', NULL, 'Boost Your Sale', 'ri-line-chart-line', 'Lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas', 'Idea & Analysis', 'ri-stack-line', 'Lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas amet est scelerisque'),
+(6, 'Portfolio', 'Our Portfolio', 'Grow And Experience Endless Possibilites To Your Business', '~', 'sections\\September2023\\7cAkkF5W4VtuVzcRvetr.jpg', 'http://127.0.0.1:8000/project', NULL, NULL, '2022-04-12 03:53:01', '2023-09-07 17:19:55', 'portfolio', 'More Portfolio', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Expertise', 'Our Expertise', 'Boost your business with our Creative Ideas and Brand Solutions', 'Lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas amet est scelerisque lectus tortor sit lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas amet est scelerisque lectus tortor sit.', NULL, 'http://127.0.0.1:8000/contact', 'sections\\September2023\\NwIyNQzpWxdraZCcqEJi.png', NULL, '2022-04-12 04:03:17', '2023-09-07 17:17:09', 'expertise', 'Contact Us', NULL, 'Boost Your Sale', 'ri-line-chart-line', 'Lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas', 'Idea & Analysis', 'ri-stack-line', 'Lorem ipsum dolor sit amet consectetur adipiscing elit et fames maecenas amet est scelerisque'),
 (8, 'Review', 'Reviews', 'Positive reviews of our clients', '~', NULL, 'https://brizdeck.com/testimonials', NULL, NULL, '2022-04-12 04:11:03', '2022-04-16 21:43:41', 'review', 'More Review', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (9, 'Team', 'Our Expert Team', 'Talented Member Ready To Start Your Project', '-', NULL, NULL, NULL, NULL, '2022-04-12 04:13:38', '2022-04-16 01:56:38', 'team', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, 'Ask', 'Ask any Question', 'Boost Business With Creative Idea & Brand Solutions With Us', '-', NULL, NULL, NULL, NULL, '2022-04-12 04:16:17', '2022-04-16 01:59:24', 'ask', NULL, NULL, NULL, NULL, NULL, 'Option 2', NULL, NULL),
@@ -1136,17 +1135,17 @@ INSERT INTO `sections` (`id`, `name`, `title`, `heading`, `description`, `backgr
 
 CREATE TABLE `services` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `icon` varchar(255) NOT NULL,
-  `body` text NOT NULL,
-  `excerpt` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `excerpt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `quote` varchar(255) DEFAULT NULL,
-  `quote_by` varchar(255) DEFAULT NULL,
-  `quote_url` varchar(255) DEFAULT '#'
+  `quote` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quote_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quote_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '#'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1186,13 +1185,13 @@ INSERT INTO `service_skill` (`id`, `service_id`, `skill_id`) VALUES
 
 CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
-  `key` varchar(255) NOT NULL,
-  `display_name` varchar(255) NOT NULL,
-  `value` text DEFAULT NULL,
-  `details` text DEFAULT NULL,
-  `type` varchar(255) NOT NULL,
-  `order` int(11) NOT NULL DEFAULT 1,
-  `group` varchar(255) DEFAULT NULL
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci,
+  `details` text COLLATE utf8mb4_unicode_ci,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order` int(11) NOT NULL DEFAULT '1',
+  `group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1202,7 +1201,7 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`, `order`, `group`) VALUES
 (1, 'site.title', 'Site Title', 'Brizdeck', '', 'text', 1, 'Site'),
 (2, 'site.description', 'Site Description', 'Brizdeck is a marketing agency that offers Digital Marketing Services to clients. If you\'re having trouble growing your business Brizdeck can be your right partner to get the best marketing services for expanding your online business. Contact with us', '', 'text', 2, 'Site'),
-(3, 'site.logo', 'Site Logo', 'settings\\April2022\\e2aW4ySVdk1GmdCBu5pJ.png', '', 'image', 3, 'Site'),
+(3, 'site.logo', 'Site Logo', 'settings\\September2023\\qwESH3ctj8OxvntIzFFq.png', '', 'image', 3, 'Site'),
 (4, 'site.google_analytics_tracking_id', 'Google Analytics Tracking ID', NULL, '', 'text', 6, 'Site'),
 (5, 'admin.bg_image', 'Admin Background Image', 'settings/April2022/1I4lCIJYd0vNmyY8rmCU.jpg', '', 'image', 5, 'Admin'),
 (6, 'admin.title', 'Admin Title', 'Brizdeck Admin', '', 'text', 1, 'Admin'),
@@ -1211,7 +1210,7 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (9, 'admin.icon_image', 'Admin Icon Image', '', '', 'image', 4, 'Admin'),
 (10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', NULL, '', 'text', 1, 'Admin'),
 (11, 'site.copyright', 'footer', 'Copyright @ 2017 - 2022  All Rights Reserved by Brizdeck', NULL, 'text', 7, 'Site'),
-(13, 'site.footer_logo', 'Site Footer Logo', 'settings\\April2022\\7VrhImYarUvVp4AzOn6l.png', NULL, 'image', 4, 'Site'),
+(13, 'site.footer_logo', 'Site Footer Logo', 'settings\\September2023\\7PPbX6nU5wDxZEXyrDqv.png', NULL, 'image', 4, 'Site'),
 (14, 'site.twitter', 'Twitter', NULL, NULL, 'text', 10, 'Site'),
 (15, 'site.instagram', 'Instagram', NULL, NULL, 'text', 11, 'Site'),
 (16, 'site.linkedin', 'Linkedin', NULL, NULL, 'text', 12, 'Site'),
@@ -1223,7 +1222,7 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (24, 'site.total_project', 'Total Projects', '100', NULL, 'text', 17, 'Site'),
 (25, 'site.world_partner', 'Worldwide Partner', '50', NULL, 'text', 18, 'Site'),
 (26, 'site.positive_review', 'Positive Review', '50', NULL, 'text', 19, 'Site'),
-(27, 'site.favicon', 'favicon', 'settings/July2022/TviumWkEydBy6aushfz5.png', NULL, 'image', 20, 'Site');
+(27, 'site.favicon', 'favicon', 'settings\\September2023\\mUMNdlBzdbEFRs3zL3Zz.png', NULL, 'image', 20, 'Site');
 
 -- --------------------------------------------------------
 
@@ -1233,8 +1232,8 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 
 CREATE TABLE `skills` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `percent` int(11) NOT NULL DEFAULT 80,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `percent` int(11) NOT NULL DEFAULT '80',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1287,8 +1286,8 @@ INSERT INTO `skill_team` (`id`, `skill_id`, `team_id`) VALUES
 
 CREATE TABLE `tags` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `slug` varchar(200) NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1311,22 +1310,22 @@ INSERT INTO `tags` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `teams` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `tagline` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `short_bio` text DEFAULT NULL,
-  `body` text DEFAULT NULL,
-  `website` varchar(255) DEFAULT NULL,
-  `facebook` varchar(255) DEFAULT NULL,
-  `github` varchar(255) DEFAULT NULL,
-  `instagram` varchar(255) DEFAULT NULL,
-  `youtube` varchar(255) DEFAULT NULL,
-  `twitter` varchar(255) DEFAULT NULL,
-  `linkedIn` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `short_bio` text COLLATE utf8mb4_unicode_ci,
+  `body` text COLLATE utf8mb4_unicode_ci,
+  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `github` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedIn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `gallery` varchar(255) DEFAULT NULL
+  `gallery` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1334,11 +1333,11 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `name`, `slug`, `tagline`, `image`, `short_bio`, `body`, `website`, `facebook`, `github`, `instagram`, `youtube`, `twitter`, `linkedIn`, `created_at`, `updated_at`, `gallery`) VALUES
-(2, 'NH Tushar', 'nh-tushar', 'Graphics Designer', 'teams\\April2022\\4WW3Bjhi5K6tEgFrLBo2.jpeg', NULL, NULL, NULL, 'https://www.facebook.com/nh.tushar.589', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:30:00', '2022-04-16 08:34:45', NULL),
-(3, 'Sadman Sakib', 'sadman-sakib', 'Digital Marketer', 'teams\\April2022\\YMS0Zqsbq9dCqEGmFoQo.jpg', NULL, NULL, NULL, 'https://www.facebook.com/md.sadmansakib13', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:34:00', '2022-04-16 08:34:52', NULL),
-(4, 'Md. Nurnobi Hosen', 'md-nurnobi-hosen', 'Web Developer', 'teams\\April2022\\nfpolwR2KZ6YUi8oike0.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:36:44', '2022-04-16 08:36:44', NULL),
-(5, 'Jannatul Ferdos Piya', 'jannatul-ferdos-piya', 'Content Writer', 'teams\\April2022\\LVTutCWCqzK6nnAt1tWj.jpeg', NULL, NULL, NULL, 'https://www.facebook.com/profile.php?id=100015859204064', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:42:05', '2022-04-16 08:42:05', NULL),
-(6, 'Musrat Jahan Moon', 'musrat-jahan-moon', 'Content Writer', 'teams\\April2022\\Z57HEzAleOIWKPSx7JEk.jpeg', NULL, NULL, NULL, 'https://www.facebook.com/jannat.jannat.5076798', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:43:12', '2022-04-16 08:43:12', NULL);
+(2, 'NH Tushar', 'nh-tushar', 'Graphics Designer', 'teams\\September2023\\wBMNKWNjCYtq2HEiK1oD.jpg', NULL, NULL, NULL, 'https://www.facebook.com/nh.tushar.589', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:30:00', '2023-09-07 17:21:45', NULL),
+(3, 'Sadman Sakib', 'sadman-sakib', 'Digital Marketer', 'teams\\September2023\\gRSI7ePYdhoEHmyvYBc8.jpg', NULL, NULL, NULL, 'https://www.facebook.com/md.sadmansakib13', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:34:00', '2023-09-07 17:21:37', NULL),
+(4, 'Md. Nurnobi Hosen', 'md-nurnobi-hosen', 'Web Developer', 'teams\\September2023\\JY9qO4FlHcqWXev9s0SG.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:36:00', '2023-09-07 17:21:28', NULL),
+(5, 'Jannatul Ferdos Piya', 'jannatul-ferdos-piya', 'Content Writer', 'teams\\September2023\\oKbS8DX3GmR94ORYufoa.jpg', NULL, NULL, NULL, 'https://www.facebook.com/profile.php?id=100015859204064', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:42:00', '2023-09-07 17:21:22', NULL),
+(6, 'Musrat Jahan Moon', 'musrat-jahan-moon', 'Content Writer', 'teams\\September2023\\M0AHXosideJIGsKzOAHe.jpg', NULL, NULL, NULL, 'https://www.facebook.com/jannat.jannat.5076798', NULL, NULL, NULL, NULL, NULL, '2022-04-16 08:43:00', '2023-09-07 17:21:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -1348,14 +1347,14 @@ INSERT INTO `teams` (`id`, `name`, `slug`, `tagline`, `image`, `short_bio`, `bod
 
 CREATE TABLE `testimonials` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `review` varchar(255) NOT NULL,
-  `slug` varchar(100) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `review` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `url` varchar(255) DEFAULT '#'
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '#'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1363,7 +1362,7 @@ CREATE TABLE `testimonials` (
 --
 
 INSERT INTO `testimonials` (`id`, `name`, `title`, `image`, `review`, `slug`, `created_at`, `updated_at`, `url`) VALUES
-(7, 'MuhamadF ahad', 'Client', 'testimonials/April2022/bBLpLBdxVYqamUT0SBg0.webp', 'Excellent developer i have ever found. He actually listen what customer wants and deliver the high quality work on time. Very good experience with him.', 'muhamadf-ahad', '2022-04-16 21:42:19', '2022-04-16 21:42:19', NULL);
+(7, 'MuhamadF ahad', 'Client', 'testimonials\\September2023\\hpwkUuYDYu3NL2m7VAVf.jpg', 'Excellent developer i have ever found. He actually listen what customer wants and deliver the high quality work on time. Very good experience with him.', 'muhamadf-ahad', '2022-04-16 21:42:00', '2023-09-07 16:29:29', 'tt');
 
 -- --------------------------------------------------------
 
@@ -1373,11 +1372,11 @@ INSERT INTO `testimonials` (`id`, `name`, `title`, `image`, `review`, `slug`, `c
 
 CREATE TABLE `translations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `table_name` varchar(255) NOT NULL,
-  `column_name` varchar(255) NOT NULL,
+  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `column_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `foreign_key` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) NOT NULL,
-  `value` text NOT NULL,
+  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1427,17 +1426,17 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `avatar` varchar(255) DEFAULT 'users/default.png',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'users/default.png',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `settings` text DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `settings` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1445,7 +1444,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `slug`, `phone`) VALUES
-(1, 1, 'Admin', 'admin@admin.com', 'users\\March2022\\0kXCBncTGyT3JYvKWjTc.jpg', NULL, '$2y$10$3KCj5AIAw2AqWZK5OiyYWuL6cy7SKp5IstQuKBOzvRuEv0FxaoX/u', 'H3scUj3e2F4vUMiQrjhcXsrseUwzgxmsPHxQbgd1AAYEI88pag6gtfoIcE1D', '{\"locale\":\"en\"}', '2022-03-12 10:50:16', '2022-03-12 10:53:40', '0', NULL),
+(1, 1, 'Admin', 'admin@admin.com', 'users\\September2023\\fc8hVaJCc0pbrwKBcHm2.jpg', NULL, '$2y$10$LBXIskz4qLzj52RqidC6TOQHDCbtbDpsNbZUi5pJ.fMZiPMmR1B56', 'H3scUj3e2F4vUMiQrjhcXsrseUwzgxmsPHxQbgd1AAYEI88pag6gtfoIcE1D', '{\"locale\":\"en\"}', '2022-03-12 10:50:16', '2023-09-07 16:25:00', NULL, NULL),
 (2, 1, 'Md. Nurnobi Hosen', 'nurnobishanto1@gmail.com', 'users/April2022/AT1aW7JXiPHWoOpuH3ot.jpg', NULL, '$2y$10$IlbY36qNmUm6JFacSAKCLeGBJkMH.zOM9EWUgdpFGP9dTTVx7i.ha', '9dNagWqz6GbqRuFz0NTTknbu22e0q33n4Z6XtqEBdDLdccG7s0WSxy6EOtkY', '{\"locale\":\"en\"}', '2022-03-18 04:25:28', '2022-07-19 15:22:12', NULL, NULL),
 (3, 3, 'brizdeck', 'support@brizdeck.com', 'users/April2022/owXchKh5932gmrPtrtGp.jpg', NULL, '$2y$10$eOOWkRg9vtpybSYW1X2LZuGDYjfSf5KO4dDZhURsTfhAPgBRSaiBG', 'DHwh4F8md9UjWx3sK1HQ4AJuXxXvt0axRCDB48uPrB6IE7FXfUfzseuYPfcX', '{\"locale\":\"en\"}', '2022-04-16 07:55:53', '2022-04-16 21:08:41', NULL, NULL),
 (5, 1, 'Brizdeck Official', 'brizdeck@gmail.com', 'users/July2022/6iuwONxsV7OtafCGItLg.png', NULL, '$2y$10$2ZM8Blkbm2jZez4IrXORiugifkX2Oj.k75XLhG4ZJb7Q3uhDLfN4.', NULL, '{\"locale\":\"en\"}', '2022-07-19 15:25:21', '2022-07-19 15:28:20', NULL, NULL);
@@ -1901,7 +1900,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
